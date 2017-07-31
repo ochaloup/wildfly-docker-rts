@@ -34,6 +34,7 @@ ${JBOSS_CLI} -c --command="/subsystem=logging/console-handler=CONSOLE:write-attr
 $JBOSS_CLI -c ":shutdown"
 sleep 5
 
+ls "${JBOSS_PATH}/standalone/configuration/standalone_xml_history/
 rm -rf "${JBOSS_PATH}/standalone/configuration/standalone_xml_history/
 rm -rf "${JBOSS_PATH}/standalone/log
 rm -rf "${JBOSS_PATH}/standalone/data
