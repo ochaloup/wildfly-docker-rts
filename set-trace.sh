@@ -21,7 +21,7 @@ function set_logging() {
 }
 
 set -x
-${JBOSS_BIN_PATH}/standalone.sh -c ../../docs/examples/configs/standalone-rts.xml --admin-only > /dev/null &
+${JBOSS_BIN_PATH}/standalone.sh -c standalone-rts.xml --admin-only > /dev/null &
 [ $? -ne 0 ] && echo "Fail to start server" && exit 1
 
 wait_for_server
@@ -29,16 +29,16 @@ wait_for_server
 set_logging "com.arjuna"
 set_logging "org.jboss.jbossts"
 set_logging "org.narayana"
-${JBOSS_CLI} -c --command="/subsystem=logging/console-handler=CONSOLE:write-attribute(name=level, value=WARN)"
+${JBOSS_CLI} -c --command="/subsystem=logging/console-handler=CONSOLE:write-attribute(name=level, value=TRACE)"
 
 $JBOSS_CLI -c ":shutdown"
 sleep 5
 
-ls "${JBOSS_PATH}/standalone/configuration/standalone_xml_history/
-rm -rf "${JBOSS_PATH}/standalone/configuration/standalone_xml_history/
-rm -rf "${JBOSS_PATH}/standalone/log
-rm -rf "${JBOSS_PATH}/standalone/data
-rm -rf "${JBOSS_PATH}/standalone/tmp
+# ls "${JBOSS_PATH}/standalone/configuration/standalone_xml_history/"
+rm -rf "${JBOSS_PATH}/standalone/configuration/standalone_xml_history/"
+rm -rf "${JBOSS_PATH}/standalone/log"
+rm -rf "${JBOSS_PATH}/standalone/data"
+rm -rf "${JBOSS_PATH}/standalone/tmp"
 
 set +x
 

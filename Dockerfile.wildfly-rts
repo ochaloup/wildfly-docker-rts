@@ -4,7 +4,9 @@ USER root
 RUN yum -y install bash
 USER jboss
 
+RUN cp "/opt/jboss/wildfly/docs/examples/configs/standalone-rts.xml" "/opt/jboss/wildfly/standalone/configuration/"
+
 ADD set-trace.sh /opt
 RUN bash /opt/set-trace.sh
 
-CMD ["/opt/jboss/wildfly/bin/standalone.sh", "-c", "../../docs/examples/configs/standalone-rts.xml", "-b", "0.0.0.0", "-bmanagement", "0.0.0.0"]
+CMD ["/opt/jboss/wildfly/bin/standalone.sh", "-c", "standalone-rts.xml", "-b", "0.0.0.0", "-bmanagement", "0.0.0.0"]
