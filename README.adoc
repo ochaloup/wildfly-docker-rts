@@ -1,3 +1,24 @@
 = How to run dockerfile stuff with minishift
 
+To get it running on Minishift locally there is need to work with docker registry of the running Minishift instance
 
+```
+# setting the docker environment to use minishift docker deamon and registry
+minishift docker-env
+eval $(minishift docker-env)
+docker login -u developer -e 'ochaloup@redhat.com' -p $(oc whoami -t) $(minishift openshift registry)
+# using new version of docker client than is one installed in Fedora 23
+export PATH=/opt/minishift/docker-install/docker:$PATH
+```
+
+If you want to build a docker file with docker then
+
+```
+docker build --tag=helloworld-msa-restat/wildfly-rts -f $PWD/Dockerfile.wildfly-rts $PWD
+```
+
+Now to update existing docker app 
+
+```
+oc start-build wildfly-rts --from-file=Dockerfile.wildfly-rts --follow
+```

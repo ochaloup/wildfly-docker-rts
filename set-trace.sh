@@ -29,6 +29,15 @@ wait_for_server
 set_logging "com.arjuna"
 set_logging "org.jboss.jbossts"
 set_logging "org.narayana"
+${JBOSS_CLI} -c --command="/subsystem=logging/console-handler=CONSOLE:write-attribute(name=level, value=WARN)"
+
+$JBOSS_CLI -c ":shutdown"
+sleep 5
+
+rm -rf "${JBOSS_PATH}/standalone/configuration/standalone_xml_history/
+rm -rf "${JBOSS_PATH}/standalone/log
+rm -rf "${JBOSS_PATH}/standalone/data
+rm -rf "${JBOSS_PATH}/standalone/tmp
 
 set +x
 
